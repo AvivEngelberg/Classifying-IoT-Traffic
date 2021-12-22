@@ -65,7 +65,7 @@ This program allows to save simulations and do various detections on the tested 
 
 Notice that the second argument directoryName is required only in case where action=0.
 
-For the recommended duration times of the traces, refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
+Use identical duration time over all the tested traces. For the recommended duration times of the traces, refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
 
 Following are specified all the possible actions you can apply on the traffic:
 
@@ -73,7 +73,7 @@ Following are specified all the possible actions you can apply on the traffic:
 
 1.Argument:action=1. Assumptions: Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device, and at least one tested simulation of a device. Action: Based on the learnt simulations, returning to stdout classification of which device is active in every tested simulation file.
 
-2.
+2.Argument:action=2. Assumption: Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device, simulated from one learning trace for each device, whose duration times are identical to those of the tested traces. Action: Compute the thresholds for estimating the number of active devices and write it into a file "ThresholdsPacketRates.txt" in the working directory.
 
 3.
 
