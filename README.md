@@ -60,18 +60,31 @@ Each simulation contains the following fields:
 8. W- for learning trace it stores the value of W used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
 
 # Regular Useage
+
 This program allows to save simulations and do various detections on the tested traffic.
+
 Notice that the second argument directoryName is required only in case where action=0.
+
 For the recommended duration times of the traces, refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
+
 Following are specified all the possible actions you can apply on the traffic:
+
 0. Arguments: action=0,directoryName=yourSavedDirectoryName. Action: Saving inside sub-directory directoryName in "Saved Simulations", simulation file for any learning trace file in the devices directories and for any test trace file in the directory "Tested Traffic".
+
 1.Argument:action=1. Assumptions: Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device, and at least one tested simulation of a device. Action: Based on the learnt simulations, returning to stdout classification of which device is active in every tested simulation file.
+
 2.
+
 3.
+
 4.
+
 5.
+
 6.
+
 7.
+
 8.
 
 
