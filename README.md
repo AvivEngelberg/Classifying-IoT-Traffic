@@ -36,7 +36,7 @@ This will create directories 1-4.
 # After your first run
 Make sure to create directory for each candidate device in your network inside the working directory.
 Inside each device's directory put its learning traffic trace, i.e., trace realted to the device's outbound traffic. 
-Inside the "Tested Traffic" directory put the tested traffic traces.
+Inside the "Tested Traffic" directory put the tested traffic traces. Note: trace files are either a ".pcap" or ".pcapang" file.
 Make sure that all of the above traces have unique names, as the program use them as identifiers for the simulations.
 
 After you did this, you would need to execute
@@ -46,7 +46,7 @@ python detectorIoT.py 0 [directoryName]
 This will create the sub-diretory directoryName inside the "Saved Simulations" directory. 
 It would then create simulation file for any learning and test trace file and save it inside this sub-directory. 
 Simulation files contain data related to the devices' outbound traffic after applying the padding and shaping on it.
-Simulations related to learning traces will help us classify the tested traffic, and those related to tested traces will imitate real-time tested traffic protected with padding and shaping that we would like to examine and classify.
+Simulations related to learning traces (aka learnt simulations) will help us classify the tested traffic, and those related to tested traces (aka tested simulations) will imitate real-time tested traffic protected with padding and shaping that we would like to examine and classify.
 Since our program is only intended to simulate and imitate real padded and shaped traffic and not create actual pcap files after applying these mitigations, we also simulate the tested traces ourselves and then save them obfuscated in a simulation file.
 
 Each simulation contains the following fields:
@@ -58,6 +58,22 @@ Each simulation contains the following fields:
 6. file- the name of the learning/test trace file 
 7. q- for learning trace it stores the value of q used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
 8. W- for learning trace it stores the value of W used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
+
+# Regular Useage
+This program allows to save simulations and do various detections on the tested traffic.
+Notice that the second argument directoryName is required only in case where action=0.
+For the recommended duration times of the traces, refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
+Following are specified all the possible actions you can apply on the traffic:
+0. Arguments: action=0,directoryName=yourSavedDirectoryName. Action: Saving inside sub-directory directoryName in "Saved Simulations", simulation file for any learning trace file in the devices directories and for any test trace file in the directory "Tested Traffic".
+1.Argument:action=1. Assumptions: Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device, and at least one tested simulation of a device. Action: Based on the learnt simulations, returning to stdout classification of which device is active in every tested simulation file.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+
 
 
 
