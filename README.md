@@ -11,5 +11,6 @@ You may use different traffic traces from other sources, but please make sure to
 
 ## Usage Instructions
 To execute the code use run
-
+```
 python detectorIoT.py [action][directoryName]
+```
