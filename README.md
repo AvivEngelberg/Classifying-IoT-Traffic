@@ -84,7 +84,7 @@ Each simulation contains the following fields:
 1. The second argument directoryName is not required for action!=0.
 2. Use identical duration time for every tested trace. For the recommended duration times of the traces, refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
 3. The actions below demonstrate how information about tested traffic can be inferred through simple analysis, but are not guaranteed to yield optimal results. You may add your own modifications, to make this program more suitable for the datasets you choose to use- e.g. taking thresholds different from the mid-points between averages, different value of **k** for the **KNN** algorithm, etc.
-4. For **action=2, 4, 5 or 8**, make sure that all the learnt simulations were simulated using the same values for **q&W**, and that those values are as closest as possible to the values of **q&W** in the tested simulations.
+4. For **action=2, 3, 4, 5 or 8**, make sure that all the learnt simulations were simulated using the same values for **q&W**, and that those values are as closest as possible to the values of **q&W** in the tested simulations.
 
 ### action=1: Merging several Tested Simulations of devices into Tested Simulation of the devices' subset
 Assumption: Before running this make sure to put inside the directory "Upload Simulations" at least one tested simulation - each of a different device- where all of them were simulated using the same values for **q&W**. Action: Saving inside sub-directory "Subsets" in "Saved Simulations" a tested simulation file for the subset of devices in the tested simulations.
