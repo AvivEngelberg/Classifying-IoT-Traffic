@@ -59,27 +59,27 @@ Simulation files contain data related to the devices' outbound traffic after app
 Simulations related to learning traces (aka **learnt simulations**) will help us classify the tested traffic, and those related to tested traces (aka **tested simulations**) will imitate real-time tested traffic protected with padding and shaping that we would like to examine and classify.
 Since our program is only meant to simulate and imitate real padded and shaped traffic and not create actual pcap files after applying these mitigations, we also simulate the tested traces ourselves and then save them obfuscated in their simulation files.
 
+The the default values for simulations are **q=0.1,W=80**. You can modify their values (**W** has to be either a positive integer -for **Random-Padding**, or the negative integer (-100) - for **Level-100 Padding**, **q** needs to be a real number between 0 to 1) in DoSimulations function in line 672, in order to simulate the devices with different values than the default values **q=0.1,W=80**. To use **Level-100** padding specify **W=-1**.
+
 Each simulation contains the following fields:
-1. <ins>frequencies</ins> - a dictionary that has packet sizes as keys and their associated frequencies as values.
-2. <ins>realPeriods</ins> - for learning trace it contains the device's real-traffic periods; for tested trace (because we want to obfuscate it) it stores all the device's periods
-3. <ins>fakePeriods</ins> - for learning trace it contains the device's only-cover-traffic periods; for tested trace it's an empty list
-4. <ins>deviceNumber</ins> - for learning trace it stores the device's number, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
-5. <ins>isLearntSimulation</ins> - for learning trace it is **True**, for tested trace it is **False**
-6. <ins>file</ins> - the name of the learning/test trace file 
-7. <ins>q</ins> - for learning trace it stores the value of **q** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
-8. <ins>W</ins> - for learning trace it stores the value of **W** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
+1. <ins>frequencies</ins>: A dictionary that has packet sizes as keys and their associated frequencies as values.
+2. <ins>realPeriods</ins>: For learning trace it contains the device's real-traffic periods; for tested trace (because we want to obfuscate it) it stores all the device's periods
+3. <ins>fakePeriods</ins>: For learning trace it contains the device's only-cover-traffic periods; for tested trace it's an empty list
+4. <ins>deviceNumber</ins>: For learning trace it stores the device's number, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
+5. <ins>isLearntSimulation</ins>: For learning trace it is **True**, for tested trace it is **False**
+6. <ins>file</ins>: The name of the learning/test trace file 
+7. <ins>q</ins>: For learning trace it stores the value of **q** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
+8. <ins>W</ins>: For learning trace it stores the value of **W** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
 
 ## Other Actions Explanation
 This program allows to save simulations and do various classifications on the tested traffic.
 
 ### Notes: 
-The second argument directoryName is required only in case where action=0.
+The second argument directoryName is not required for action!=0.
 
 Use identical duration time for every tested trace. For the recommended duration times of the traces, refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
 
 The actions above demonstrate how information about tested traffic can be inferred through simple analysis, but are not guaranteed to yield optimal results. You may add your own modifications, to make this program more suitable for the datasets you choose to use- e.g. taking thresholds different from the mid-points between averages, different value of **k** for the **KNN** algorithm, etc.
-
-You can modify the values of **q&W** (**W** has to be positive integer, **q** a real number between 0 to 1) in DoSimulations function in line 672, in order to simulate the devices with different values than the default values **q=0.1,W=80**. To use **Level-100** padding specify **W=-1**.
 
 For **action=2, 4, 5 or 8**, make sure that all the learnt simulations were simulated using the same values for **q&W**, and that those values are as closest as possible to the values of **q&W** in the tested simulations.
 
