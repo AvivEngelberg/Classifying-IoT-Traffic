@@ -81,6 +81,8 @@ The actions above demonstrate how information about tested traffic can be inferr
 
 You can modify the values of **q&W** (**W** has to be positive integer, **q** a real number between 0 to 1) in DoSimulations function in line 672, in order to simulate the devices with different values than the default values **q=0.1,W=80**. To use **Level-100** padding specify **W=-1**.
 
+For **action=2, 4, 5 or 8**, make sure that all the learnt simulations were simulated using the same values for **q&W**, and that those values are as closest as possible to the values of **q&W** in the tested simulations.
+
 ### action=1
 Assumption: Before running this make sure to put inside the directory "Upload Simulations" at least one tested simulation - each of a differnet device- where all of the them were simulated using the same values for **q&W**. Action: Saving inside sub-directory "Subsets" in "Saved Simulations" a tested simulation file for the subset of devices in the tested simulations.
 
