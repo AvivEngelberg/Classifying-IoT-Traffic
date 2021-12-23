@@ -20,7 +20,7 @@ This work was developed for research purposes only, do not try to use it for mal
 
 To execute the code use run
 ```
-python classifierIoT.py [action=None][directoryName=None]
+python classifier_IoT.py [action=None][directoryName=None]
 ```
 The argument action specifies the desired action that you want to apply on the traffic. Its value should be an integer between 0--8. 
 The argument directoryName should only be specified if you use choose the value 0 for action. It specifies the directory's name in which the file will be saved.
@@ -30,7 +30,7 @@ Always run the code from the same working directory as it depends on directories
 # First Run
 When you execute the program for the first time run it without arguments
 ```
-python classifierIoT.py 
+python classifier_IoT.py 
 ```
 This will create the following directories in your working directory:
 
@@ -51,7 +51,7 @@ Inside the "Tested Traffic" directory put the tested traffic traces.
 
 After you did this, you would need to execute
 ```
-python classifierIoT.py [action=0] [directoryName=yourSavedDirectoryName]
+python classifier_IoT.py [action=0] [directoryName=yourSavedDirectoryName]
 ```
 This will create the sub-directory directoryName inside the "Saved Simulations" directory. 
 It would then create a simulation file for any learning and test trace file and save it inside this sub-directory. 
