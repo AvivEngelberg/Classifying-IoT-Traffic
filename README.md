@@ -65,7 +65,7 @@ Each simulation contains the following fields:
 1. <ins>frequencies</ins>: A dictionary that has packet sizes as keys and their associated frequencies as values.
 2. <ins>realPeriods</ins>: For learning trace it contains the device's real-traffic periods; for tested trace (because we want to obfuscate it) it stores all the device's periods
 3. <ins>fakePeriods</ins>: For learning trace it contains the device's only-cover-traffic periods; for tested trace it's an empty list
-4. <ins>deviceNumber</ins>: For learning trace it stores the device's number, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
+4. <ins>deviceNumber</ins>: For learning trace it stores the device's number, for tested trace (unknown device) it stores arbitrarily (-1)
 5. <ins>isLearntSimulation</ins>: For learning trace it is **True**, for tested trace it is **False**
 6. <ins>file</ins>: The name of the learning/test trace file 
 7. <ins>q</ins>: For learning trace it stores the value of **q** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
