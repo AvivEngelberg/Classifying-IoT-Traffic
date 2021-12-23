@@ -51,7 +51,7 @@ Inside the "Tested Traffic" directory put the tested traffic traces.
 
 After you did this, you would need to execute
 ```
-python detectorIoT.py [action=0] [directoryName=yourSavedDirectoryName]
+python classifierIoT.py [action=0] [directoryName=yourSavedDirectoryName]
 ```
 This will create the sub-diretory directoryName inside the "Saved Simulations" directory. 
 It would then create a simulation file for any learning and test trace file and save it inside this sub-directory. 
