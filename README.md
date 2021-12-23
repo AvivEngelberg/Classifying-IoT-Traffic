@@ -8,14 +8,12 @@ If you publish any results with data collected using this software, please cite 
 If you have any questions or suggestions for improvements, please let me know.
 <p>&nbsp;</p>
 
-
 We examined a wide range of smart devices from different classes (cameras, plugs, bulbs, etc.) coming from well-known vendors (e.g. Amazon, Belkin, etc).
 
 The devices' traffic traces are from the open sources of [Sivanathan et al.](https://ieeexplore.ieee.org/document/8116438) and [Trimananda et al.](https://www.ndss-symposium.org/ndss-paper/packet-level-signatures-for-smart-home-devices/). 
 
 You may use different traffic traces from other sources, but please make sure to follow the usage instructions below.
-
-
+<p>&nbsp;</p>
 
 The developed software is intended to examine padding and shaping mitigations applied on a tested network traffic and demonstrate how we could learn and simulate it similarly ourselves in order to gain information about the attacked network.
 
