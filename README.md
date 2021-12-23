@@ -6,7 +6,7 @@ If you publish any results with data collected using this software, please cite 
 **Classification of Encrypted IoT Traffic Despite Padding and Shaping.** Aviv Engelberg, Avishai Wool. [arXiv Preprint](https://arxiv.org/abs/2110.11188)
 
 If you have any questions or suggestions for improvements, please let me know.
-&nbsp;     
+<p>&nbsp;</p>
 
 
 We examined a wide range of smart devices from different classes (cameras, plugs, bulbs, etc.) coming from well-known vendors (e.g. Amazon, Belkin, etc).
