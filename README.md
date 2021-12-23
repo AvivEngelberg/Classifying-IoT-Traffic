@@ -59,8 +59,8 @@ Simulations related to learning traces (aka **learnt simulations**) will help us
 Since our program is only meant to simulate and imitate real padded and shaped traffic and not create actual pcap files after applying these mitigations, we also simulate the tested traces ourselves and then save them obfuscated in their simulation files.
 
 Each simulation contains the following fields:
-1. frequencies- a dictionary that has packet sizes as keys and their associated frequencies as values.
-2. realPeriods- for learning trace it contains the device's real-traffic periods; for tested trace (because we want to obfuscate it) it stores all the device's periods
+1. <u>frequencies</u>- a dictionary that has packet sizes as keys and their associated frequencies as values.
+2. <ins>realPeriods</ins>- for learning trace it contains the device's real-traffic periods; for tested trace (because we want to obfuscate it) it stores all the device's periods
 3. fakePeriods- for learning trace it contains the device's only-cover-traffic periods; for tested trace it's an empty list
 4. deviceNumber- for learning trace it stores the device's number, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
 5. isLearntSimulation- for learning trace it is **True**, for tested trace it is **False**
