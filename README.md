@@ -56,13 +56,17 @@ After you did this, you would need to execute
 python classifier_IoT.py 0 yourSavedDirectoryName
 ```
 This will create the sub-directory directoryName inside the "Saved Simulations" directory. 
+
 It would then create a simulation file for any learning and test trace file and save it inside this sub-directory. 
+
 Simulation files contain data related to the devices' outbound traffic after applying the padding and shaping on it.
+
 Simulations related to learning traces (aka **learnt simulations**) will help us classify the tested traffic, and those related to tested traces (aka **tested simulations**) will imitate real-time tested traffic protected with padding and shaping that we would like to examine and classify.
+
 Since our program is only meant to simulate and imitate real padded and shaped traffic and not create actual ".pcap" files after applying these mitigations, we also simulate the tested traces ourselves and then save them obfuscated in their tested simulation files.
 
 The default values for simulations are **q=0.1,W=80**. You can modify their values (**W** has to be either a positive integer -for **Random-Padding**, or the negative integer (-100) - for **Level-100 Padding**, **q** needs to be a real number between 0 to 1) in DoSimulations function in line 636, in order to simulate the devices with different values than the default values **q=0.1,W=80**.
-
+<p>&nbsp;</p>
 Each simulation contains the following fields:
 1. <ins>frequencies</ins>: A dictionary that has packet sizes as keys and their associated frequencies as values.
 2. <ins>realPeriods</ins>: For learning trace it contains the device's real-traffic periods; for tested trace (because we want to obfuscate it) it stores all the device's periods
@@ -74,7 +78,6 @@ Each simulation contains the following fields:
 8. <ins>W</ins>: For learning trace it stores the value of **W** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
 
 ### Other Actions Explanation
-This program allows to save simulations and do various classifications on the tested traffic.
 
 #### Notes: 
 The second argument directoryName is not required for action!=0.
