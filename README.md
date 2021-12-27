@@ -25,7 +25,7 @@ To execute the code run
 python classifier_IoT.py [action=None][directoryName=None]
 ```
 The argument action specifies the desired action that you want to apply on the traffic. Its value should be an integer between 0-8. 
-The argument directoryName should only be specified if you use choose the value 0 for action. It specifies the directory's name in which the simulation file will be saved.
+The argument directoryName should only be specified if you choose the value 0 for action. It specifies the directory's name in which the simulation file will be saved.
 
 Always run the code from the same working directory as it depends on directories it creates and reads from during its execution.
 
