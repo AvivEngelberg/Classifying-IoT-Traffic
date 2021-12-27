@@ -66,7 +66,7 @@ Simulations related to learning traces (aka **learnt simulations**) will help us
 
 Since our program is only meant to simulate and imitate real padded and shaped traffic and not create actual ".pcap" files after applying these mitigations, we also simulate the tested traces ourselves and then save them obfuscated in their tested simulation files.
 
-The default values for simulations are **q=0.1,W=80**. You can modify their values (**W** has to be either a positive integer -for **Random-Padding**, or the negative integer (-100) - for **Level-100 Padding**, **q** needs to be a real number between 0 to 1) in DoSimulations function in line 636, in order to simulate the devices with different values than the default values **q=0.1,W=80**.
+The default values for simulations are **q=0.1,W=80**. You can modify their values (**W** has to be either a positive integer -for **Random-Padding**, or the negative integer (-100) - for **Level-100 Padding**, **q** needs to be a real number between 0 to 1) in DoSimulations function in line 636, in order to simulate the devices with different values than the default values.
 <p>&nbsp;</p>
 
 Each simulation contains the following fields:
