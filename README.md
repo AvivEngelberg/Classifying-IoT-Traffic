@@ -44,11 +44,10 @@ This will create the following directories in your working directory:
 ## After your first run
 Make sure to create a directory for each candidate device in your network inside the working directory - **the name of each such directory needs to start with "device"**.
 
-Inside each device's directory put its learning traffic traces (either ".pcap" or ".pcapang" files), i.e., traces related to the device's outbound traffic. 
+Inside each device's directory put its learning traffic traces files (either ".pcap" or ".pcapang" files), i.e., traces related to the device's outbound traffic. 
 
-Inside the "Tested Traffic" directory put the tested traffic traces you want to examine.
+Inside the "Tested Traffic" directory put the tested traffic traces files that you want to examine.
 
-**Make sure that all of the above traces have unique names, as the program use them as identifiers for the simulations.**
 ## Creating Simulation Files
 
 After you did this, you would need to execute
