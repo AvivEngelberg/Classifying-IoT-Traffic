@@ -80,7 +80,7 @@ def Padding(pktSize,W):
         else:
             return 1500
 
-def STP(timeList,sizeList,dictPackets,file,q,W):
+def STP(timeList,sizeList,dictPackets,q,W):
     Counter=collections.Counter
     sort=np.sort
     binomial=np.random.binomial
@@ -602,19 +602,19 @@ def UploadSimulations():
         f.close()
     return simulations
         
-def ObfuscatedSTP(timeList,sizeList,dictPackets,file,q,W):
-    return STP(timeList,sizeList,dictPackets,file,q,W)[0]
+def ObfuscatedSTP(timeList,sizeList,dictPackets,q,W):
+    return STP(timeList,sizeList,dictPackets,q,W)[0]
     
 def SaveSimulations(devicesData,q,W,directoryName):
     Counter=collections.Counter
     for (file,sizeList,timeList,dictPackets,deviceNumber,isLearntSimulation) in devicesData:
         if isLearntSimulation:
-            packetSizesAfterSTP,realPeriods,fakePeriods=STP(timeList,sizeList,dictPackets,file,q,W) 
+            packetSizesAfterSTP,realPeriods,fakePeriods=STP(timeList,sizeList,dictPackets,q,W) 
             currentSimulation=(dict(Counter(packetSizesAfterSTP)),realPeriods,fakePeriods,deviceNumber,isLearntSimulation,file,q,W)
         #Tested Simulation
         else:         
             #This is imitating the obfuscatd output that we would observe of tested traffic
-            packetSizesAfterSTP=ObfuscatedSTP(timeList,sizeList,dictPackets,file,q,W)           
+            packetSizesAfterSTP=ObfuscatedSTP(timeList,sizeList,dictPackets,q,W)           
             fakePeriods=[]
             #All of the Tested Simulation's periods are stored by default in its realPeriods  
             realPeriods=list(SplitPeriods(packetSizesAfterSTP))
@@ -653,7 +653,7 @@ def main(argv):
                 os.makedirs(dirName)
     else:       
         action=int(argv[1])    
-        #Number of candidate devices in the network is assumed to be the number of dirs in the working dir who starts with "device"        
+        #Number of candidate devices in the network is assumed to be the number of dirs in the working dir who starts with "device"      
         numberOfDevices=len([x for x in listdir() if not isfile(x) and x.startswith("device")])
         devicesData=[]
 
@@ -663,7 +663,7 @@ def main(argv):
             if len(argv)>2:
                 direcoryName=join(savedSimulationsDir,argv[2])
                 if not os.path.exists(direcoryName):
-                    os.makedirs(direcoryName)         
+                    os.makedirs(direcoryName)       
                 for deviceNumber in range(1,numberOfDevices+1):
                     deviceDir="device"+str(deviceNumber)
                     trafficTraceFiles=[x for x in listdir(deviceDir) if isfile(join(deviceDir, x)) and (x.endswith("pcap") or x.endswith("pcapng"))]
@@ -671,7 +671,7 @@ def main(argv):
          
                     for file in trafficTraceFiles:
                         sizesList,timesList,dictPackets=Extractor(join(deviceDir, file))
-                        devicesData+=[(file,sizeList,timeList,dictPackets,deviceNumber,isLearntSimulation)]
+                        devicesData+=[(deviceDir+"_"+file,sizeList,timeList,dictPackets,deviceNumber,isLearntSimulation)]
                   
                 testedFiles=[x for x in listdir(testedTrafficDir) if isfile(join(testedTrafficDir, x)) and (x.endswith("pcap") or x.endswith("pcapng"))]
                 isLearntSimulation=False
@@ -679,7 +679,7 @@ def main(argv):
                 deviceNumber=-1
                 for file in testedFiles:
                     sizesList,timesList,dictPackets=Extractor(join(testedTrafficDir, file))           
-                    devicesData+=[(file,sizeList,timeList,dictPackets,deviceNumber,isLearntSimulation)]
+                    devicesData+=[(testedTrafficDir+"_"+file,sizeList,timeList,dictPackets,deviceNumber,isLearntSimulation)]
                 DoSimulations(devicesData,action,numberOfDevices,direcoryName)
             else:
                 print("Please specify directoryName argument in case of action=0")
