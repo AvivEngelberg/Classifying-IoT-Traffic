@@ -42,11 +42,13 @@ This will create the following directories in your working directory:
 4. "Tested Traffic": Directory in which tested traffic traces files are stored.
 
 ## After your first run
-Make sure to create a directory for each candidate device in your network inside the working directory, and **make sure to name them like this: "device1", "device2", etc**.
+Make sure to create a directory for each candidate device in your network inside the working directory, and to name them like this: "device1", "device2", etc.
 
 Inside each device's directory put its learning traffic traces files (either ".pcap" or ".pcapang" files), i.e., traces related to the device's outbound traffic. 
 
 Inside the "Tested Traffic" directory put the tested traffic traces files that you want to examine.
+
+**Use identical duration time for every tested trace. For the recommended duration times of the traces, refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).**
 
 ## Creating Simulation Files
 
@@ -54,9 +56,9 @@ After you did this, you would need to execute
 ```
 python classifier_IoT.py 0 yourSavedDirectoryName
 ```
-This will create the sub-directory directoryName inside the "Saved Simulations" directory. 
+This will create the sub-directory yourSavedDirectoryName inside the "Saved Simulations" directory. 
 
-It would then create a simulation file for any learning and test trace file and save it inside this sub-directory. 
+It would then create a simulation file for each learning trace file in the devices directories and each test trace file in the "Tested Traffic" directory, and save it inside this sub-directory. 
 
 Simulation files contain data related to the devices' outbound traffic after applying the padding and shaping on it.
 
@@ -69,53 +71,58 @@ The default values for simulations are **q=0.1,W=80**. You can modify their valu
 
 Each simulation contains the following fields:
 1. <ins>frequencies</ins>: A dictionary that has packet sizes as keys and their associated frequencies as values.
-2. <ins>realPeriods</ins>: For learning trace it contains the device's real-traffic periods; for tested trace (because we want to obfuscate it) it stores all the device's periods
-3. <ins>fakePeriods</ins>: For learning trace it contains the device's only-cover-traffic periods; for tested trace it's an empty list
-4. <ins>deviceNumber</ins>: For learning trace it stores the device's number, for tested trace (unknown device) it stores arbitrarily (-1)
-5. <ins>isLearntSimulation</ins>: For learning trace it is **True**, for tested trace it is **False**
-6. <ins>file</ins>: The name of the learning/test trace file 
-7. <ins>q</ins>: For learning trace it stores the value of **q** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
-8. <ins>W</ins>: For learning trace it stores the value of **W** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1)
+2. <ins>realPeriods</ins>: For learning trace it contains the device's real-traffic periods; for tested trace (because we want to obfuscate it) it stores all the device's periods.
+3. <ins>fakePeriods</ins>: For learning trace it contains the device's only-cover-traffic periods; for tested trace it's an empty list.
+4. <ins>deviceNumber</ins>: For learning trace it stores the device's number, for tested trace (unknown device) it stores arbitrarily (-1).
+5. <ins>isLearntSimulation</ins>: For learning trace it is **True**, for tested trace it is **False**.
+6. <ins>file</ins>: The trace file's directory name merged with the trace file's name - used as an identifier for the simulation.
+7. <ins>q</ins>: For learning trace it stores the value of **q** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1).
+8. <ins>W</ins>: For learning trace it stores the value of **W** used in the simulation, for tested trace (because we want to obfuscate it) it stores arbitrarily (-1).
 
 ## Other Actions Explanation
 
 ### Notes: 
 1. The second argument directoryName is not required for action!=0.
-2. Use identical duration time for every tested trace. For the recommended duration times of the traces, refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
-3. The actions below demonstrate how information about tested traffic can be inferred through simple analysis, but are not guaranteed to yield optimal results. You may add your own modifications, to make this program more suitable for the datasets you choose to use- e.g. taking thresholds different from the mid-points between averages, different value of **k** for the **KNN** algorithm, etc.
-4. For **action=2, 3, 4, 5 or 8**, make sure that all the learnt simulations were simulated using the same values for **q&W**, and that those values are as closest as possible to the values of **q&W** in the tested simulations.
+2. The actions below demonstrate how information about tested traffic can be inferred through simple analysis, but are not guaranteed to yield optimal results. You may add your own modifications, to make this program more suitable for the datasets you choose to use - e.g. taking thresholds different from the mid-points between averages, different value of **k** for the **KNN** algorithm, etc.
+3. For **action=2, 3, 4, 5 or 8**, make sure that all the learnt simulations were simulated using the same values for **q&W**, and that those values are a good estimate of the values of **q&W** in the tested simulations.
 
-### action=1: Merging several Tested Simulations of devices into Tested Simulation of the devices' subset
-Assumption: Before running this make sure to put inside the directory "Upload Simulations" at least one tested simulation - each of a different device- where all of them were simulated using the same values for **q&W**. Action: Saving inside sub-directory "Subsets" in "Saved Simulations" a tested simulation file for the subset of devices in the tested simulations.
+### action=1: Merging several Tested Simulations of devices into a Tested Simulation of the devices' subset
+Before running this make sure to put inside the directory "Upload Simulations" at least one tested simulation where all of them were simulated using the same values for **q&W**. 
+
+Saving inside sub-directory "Subsets" in "Saved Simulations" a tested simulation file for the subset of devices in all the tested simulations.
 
 ### action=2: Classifying devices
-Assumptions: Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device, and at least one tested simulation of a device. Action: Based on the learnt simulations, printing to stdout the classification of which device is active in every tested simulation file.
+Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, and at least one tested simulation file of a device.
+
+Based on the learnt simulations, printing to stdout the classification of which device is active in every tested simulation file.
 
 ### action=3: Computing thresholds for estimating number of active devices  
-Assumptions: Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device, simulated from one learning trace for each device, whose duration times are identical to those of the tested traces. Action: Compute the thresholds for estimating the number of active devices and write it into a file "ThresholdsPacketRates.txt" in the working directory.
+Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, simulated from learning traces whose duration times are identical to those of the tested traces.
+
+Compute the thresholds for estimating the number of active devices and write it into a file "ThresholdsPacketRates.txt" in the working directory.
 
 ### action=4: Subset Identification - Using Full Comparison Check
-Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device, and at least one tested simulation of a subset of devices. 
+Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, and at least one tested simulation file of a subset of devices. 
 
-Based on the learnt simulations, printing to stdout the estimated subset of active devices in every tested simulation file - using the Full Comparison Check algorithm (for mor information - see [arXiv Preprint](https://arxiv.org/abs/2110.11188)).
+Based on the learnt simulations, printing to stdout the estimated subset of active devices in every tested simulation file - using the Full Comparison Check algorithm (for more information - see [arXiv Preprint](https://arxiv.org/abs/2110.11188)).
 
 ### action=5: Subset Identification - Using Fast Scores Bsed Check(FSBC)
-Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device, and at least one tested simulation of a subset of devices. 
+Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, and at least one tested simulation file of a subset of devices. 
 
-Based on the learnt simulations, printing to stdout the estimated subset of active devices in every tested simulation file - using the FSBC algorithm (for mor information - see [arXiv Preprint](https://arxiv.org/abs/2110.11188)).
+Based on the learnt simulations, printing to stdout the estimated subset of active devices in every tested simulation file - using the FSBC algorithm (for more information - see [arXiv Preprint](https://arxiv.org/abs/2110.11188)).
 
 ### action=6: Estimating value of W 
-Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device per each value of **W** you are examining, and at least one tested simulation of a device.
+Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device simulated with **W** per each value of **W** you are examining, and at least one tested simulation file of a device.
 
 Based on all the learnt simulations, printing to stdout the estimated value of **W** chosen from all the examined values of **W** in the learnt simulations along with the classification of which device is active - for every tested simulation file.
 
 ### action=7: Estimating value of q 
-Before running this, first execute the program with action=1 (if the value of **W** is unknown then with action=5 instead) in order to get the tested device in each tested simulation. Then make sure to put inside the directory "Upload Simulations" all the tested simulation whose active device is identical, and one learnt simulation of that device per each value of **q** you are examining.
+Before running this, first execute the program with action=1 (unless the value of **W** is unknown - then execute it with action=5 instead) in order to get the tested device in each tested simulation. Then make sure to put inside the directory "Upload Simulations" all the tested simulations files whose active device is identical, and one learnt simulation file of that device simulated with **q** per each value of **q** you are examining.
 
 Based on all the learnt simulations, printing to stdout the estimated value of **q** chosen from all the examined values of **q** in the learnt simulations for every tested simulation file.
 
 ### action=8: Classifying Periods: Real/Only-Cover Traffic
-Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation of each device, and at least one tested simulation of a device.
+Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, and at least one tested simulation file of a device.
 
 Based on the learnt simulations, printing to stdout the classification (using KNN) report of the periods ("Real Traffic"/"Only-Cover Traffic") in every tested simulation file.
 
