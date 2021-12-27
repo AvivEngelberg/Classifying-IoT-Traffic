@@ -39,7 +39,7 @@ This will create the following directories in your working directory:
 1. "Saved Simulations": Directory where all the simulations files created during execution are saved.
 2. "Upload Simulations": Directory from which simulations file are uploaded and used for the program's purpose.
 3. "SavedSimulations\Subsets": Sub-directory inside "SavedSimulations" in which devices' subsets' simulation files are saved.
-4. "Tested Traffic": Directory in which tested traffic traces are stored.
+4. "Tested Traffic": Directory in which tested traffic traces files are stored.
 
 ## After your first run
 Make sure to create a directory for each candidate device in your network inside the working directory - **the name of each such directory needs to start with "device"**.
