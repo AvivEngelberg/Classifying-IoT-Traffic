@@ -20,7 +20,7 @@ The developed software is intended to examine padding and shaping mitigations ap
 This work was developed for research purposes only, do not try to use it for malicious purposes. 
 ## Usage Instructions
 
-To execute the code use run
+To execute the code run
 ```
 python classifier_IoT.py [action=None][directoryName=None]
 ```
