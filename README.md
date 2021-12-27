@@ -15,7 +15,7 @@ The devices' traffic traces are from the open sources of [Sivanathan et al.](htt
 You may use different traffic traces from other sources, but please make sure to follow the usage instructions below.
 <p>&nbsp;</p>
 
-The developed software is intended to examine padding and shaping mitigations applied on a tested network traffic and demonstrate how we could learn and simulate it similarly ourselves in order to gain information about the attacked network.
+The developed software is intended to examine padding and shaping mitigations applied on a real-time tested network traffic and demonstrate how we could learn and simulate traffic similarly ourselves in order to gain information about the tested network.
 
 This work was developed for research purposes only, do not try to use it for malicious purposes. 
 ## Usage Instructions
