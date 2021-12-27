@@ -42,7 +42,7 @@ This will create the following directories in your working directory:
 4. "Tested Traffic": Directory in which tested traffic traces files are stored.
 
 ## After your first run
-Make sure to create a directory for each candidate device in your network inside the working directory - **the name of each such directory needs to start with "device"**.
+Make sure to create a directory for each candidate device in your network inside the working directory, and **make sure to name them like this: "device1", "device2", etc**.
 
 Inside each device's directory put its learning traffic traces files (either ".pcap" or ".pcapang" files), i.e., traces related to the device's outbound traffic. 
 
