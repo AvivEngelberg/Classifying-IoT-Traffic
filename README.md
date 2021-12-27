@@ -58,7 +58,7 @@ python classifier_IoT.py 0 yourSavedDirectoryName
 ```
 This will create the sub-directory yourSavedDirectoryName inside the "Saved Simulations" directory. 
 
-It would then create a simulation file for each learning trace file in the devices directories and each test trace file in the "Tested Traffic" directory, and save it inside this sub-directory. 
+It would then create a simulation file for each learning trace file in the devices' directories and for each test trace file in the "Tested Traffic" directory, and save it inside this sub-directory. 
 
 Simulation files contain data related to the devices' outbound traffic after applying the padding and shaping on it.
 
