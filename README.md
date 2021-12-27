@@ -83,7 +83,7 @@ Each simulation contains the following fields:
 
 ### Notes: 
 1. The second argument directoryName is not required for action!=0.
-2. The actions below demonstrate how information about tested traffic can be inferred through simple analysis, but are not guaranteed to yield optimal results. You may add your own modifications, to make this program more suitable for the datasets you choose to use - e.g. taking thresholds different from the mid-points between averages, different value of **k** for the **KNN** algorithm, etc.
+2. The actions below demonstrate how information about tested traffic can be inferred through simple analysis, but are not guaranteed to yield optimal results for any dataset. You may add your own modifications, to make this program more suitable for the datasets you choose to use - e.g. taking thresholds different from the mid-points between averages, different value of **k** for the **KNN** algorithm, etc.
 3. For **action=2, 3, 4, 5 or 8**, make sure that all the learnt simulations were simulated using the same values for **q&W**, and that those values are a good estimate of the values of **q&W** in the tested simulations.
 
 ### action=1: Merging several Tested Simulations of devices into a Tested Simulation of the devices' subset
