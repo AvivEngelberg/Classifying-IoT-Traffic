@@ -36,8 +36,8 @@ python classifier_IoT.py
 ```
 This will create the following directories in your working directory:
 
-1. "Saved Simulations": Directory where all the simulations files created during execution are saved.
-2. "Upload Simulations": Directory from which simulations file are uploaded and used for the program's purpose.
+1. "Saved Simulations": Directory where all the simulation files created during execution are saved.
+2. "Upload Simulations": Directory from which simulation files are uploaded and used for the program's purpose.
 3. "SavedSimulations\Subsets": Sub-directory inside "SavedSimulations" in which devices' subsets' simulation files are saved.
 4. "Tested Traffic": Directory in which tested traffic traces files are stored.
 
