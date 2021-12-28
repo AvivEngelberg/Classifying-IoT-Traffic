@@ -69,7 +69,7 @@ Since our program is only meant to simulate and imitate real padded and shaped t
 The default values for simulations are **q=0.1,W=80**. You can modify their values (**W** has to be either a positive integer -for **Random-Padding**, or the negative integer (-100) - for **Level-100 Padding**, **q** needs to be a real number between 0 to 1) in DoSimulations function in line 636, in order to simulate the devices with different values.
 
 Each simulation contains the following fields:
-1. <ins>frequencies</ins>: A dictionary that has packet sizes as keys and their associated frequencies as values.
+1. <ins>frequencies</ins>: A dictionary that has the device's packet sizes as keys and their associated frequencies as values.
 2. <ins>realPeriods</ins>: For learning trace it contains the device's real-traffic periods; for tested trace (because we want to obfuscate it) it stores all the device's periods.
 3. <ins>fakePeriods</ins>: For learning trace it contains the device's only-cover-traffic periods; for tested trace it's an empty list.
 4. <ins>deviceNumber</ins>: For learning trace it stores the device's number; for tested trace (unknown device) it stores arbitrarily (-1).
