@@ -239,20 +239,22 @@ def STP(timeList,sizeList,dictPackets,q,W):
     
     return packetSizesAfterSTP,realPeriods,fakePeriods
 
-
 def CreateSubsetSimulation(testedSimulations):
     Counter=collections.Counter
     totalFrequencies=Counter()
+    totalPeriods=[]
     totalFile=""
-    #Merging the tested frequencies and files' names of any Tested Simulation
+    #Merging the tested frequencies, periods and files' names of any Tested Simulation
     for simulation in testedSimulations:             
         totalFrequencies+=simulation[0]
+        totalPeriods+=simulation[1]
+        #Last character ('\n') is removed
         totalFile+=simulation[5][:-1]
     #q&W are assumed to be the same for any Tested Simulation, arbitrarily taken from the first simulation
     q=testedSimulations[0][6]
     W=testedSimulations[0][7]
     #Creating Simulation for the subset of devices in testedSimulations
-    currentSimulation =(dict(totalFrequencies),[],[],-1,False,totalFile,q,W)
+    currentSimulation =(dict(totalFrequencies),totalPeriods,[],-1,False,totalFile,q,W)
     simulationFile="Simulation_"+totalFile+".txt"        
 
     directoryName=join(savedSimulationsDir,"Subsets")
@@ -264,8 +266,6 @@ def CreateSubsetSimulation(testedSimulations):
     for i in range(len(currentSimulation)):
         f.write(str(currentSimulation[i])+"\n")
     f.close()    
-
-
 
 def ClassifyingDevices(learntSimulations,testedSimulations,numberOfDevices):
     cosine=scipy.spatial.distance.cosine
