@@ -86,7 +86,7 @@ Each simulation contains the following fields:
 3. For **action=2, 3, 4, 5 or 8**, make sure that all the learnt simulations were simulated using the same values of **q&W**, and that those values are a good estimate of the values of **q&W** used in the tested simulations.
 
 ### action=1: Merging several Tested Simulations of devices into a Tested Simulation of the devices' subset
-Before running this make sure to put inside the directory "Upload Simulations" at least one tested simulation where all of them were simulated using the same values for **q&W**. 
+Before running this make sure to put inside the directory "Upload Simulations" at least one tested simulation where all of them were simulated using the same values of **q&W**. 
 
 <ins>What it does</ins>: Saving inside sub-directory "Subsets" in "Saved Simulations" a tested simulation file for the subset of devices in all the tested simulations.
 
