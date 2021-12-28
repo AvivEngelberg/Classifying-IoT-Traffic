@@ -112,12 +112,12 @@ Before running this make sure to put inside the directory "Upload Simulations" o
 ### action=6: Estimating value of W 
 Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device simulated with **W** per each value of **W** you are examining, and at least one tested simulation file of a device.
 
-<ins>What it does</ins>: Based on all the learnt simulations, printing to stdout the estimated value of **W** chosen from all the examined values of **W** in the learnt simulations along with the classification of which device is active - for every tested simulation file.
+<ins>What it does</ins>: Based on all the learnt simulations, printing to stdout the estimated value of **W** chosen from all the examined values of **W** in the learnt simulations along with the classification of which device is active, for every tested simulation file.
 
 ### action=7: Estimating value of q 
 Before running this, first execute the program with action=1 (unless the value of **W** is unknown - then execute it instead with action=6 to also get an estimate of **W**) in order to get the tested device in each tested simulation. Then make sure to put inside the directory "Upload Simulations" all the tested simulations files whose active device is identical, and one learnt simulation file of that device simulated with **q** per each value of **q** you are examining.
 
-<ins>What it does</ins>: Based on all the learnt simulations, printing to stdout the estimated value of **q** chosen from all the examined values of **q** in the learnt simulations for every tested simulation file.
+<ins>What it does</ins>: Based on all the learnt simulations, printing to stdout the estimated value of **q** chosen from all the examined values of **q** in the learnt simulations, for every tested simulation file.
 
 ### action=8: Classifying Periods: Real/Only-Cover Traffic
 Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, and at least one tested simulation file of a device.
