@@ -94,7 +94,7 @@ Before running this make sure to put inside the directory "Upload Simulations" o
 
 <ins>What it does</ins>: Based on the learnt simulations, printing to stdout the classification of which device is active in every tested simulation file.
 
-### action=3: Computing thresholds for estimating number of active devices  
+### action=3: Computing thresholds for estimating the number of active devices  
 Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, simulated from learning traces whose duration times are identical to those of the tested traces.
 
 <ins>What it does</ins>: Compute the thresholds for estimating the number of active devices and write it into a file "ThresholdsPacketRates.txt" in the working directory.
