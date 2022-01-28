@@ -64,7 +64,7 @@ def Padding(pktSize,W):
     randint=random.randint
     #Random Padding
     if W>0:
-        return randint(1,W)
+        return pktSize+randint(1,W)
     #Level-100 Padding
     if W==-100:
         if pktSize<=100:
@@ -79,6 +79,7 @@ def Padding(pktSize,W):
             return randint(pktSize,1400)
         else:
             return 1500
+    
 
 def STP(timeList,sizeList,dictPackets,q,W):
     Counter=collections.Counter
@@ -137,26 +138,16 @@ def STP(timeList,sizeList,dictPackets,q,W):
                     if len(queueRealPackets)>0:
                         #First packet in queueRealPackets has highest priority
                         realSize=dictPackets[queueRealPackets[0]]
-                        #Level-100 Padding
-                        if W==-100:
-                            paddingSize=Padding(realSize,W)-realSize
-                        #Random Padding
-                        else:
-                            paddingSize=Padding(realSize,W)
-                        currentPeriod+=[realSize+paddingSize]
+                        paddedSize=Padding(realSize,W)
+                        currentPeriod+=[paddedSize]
                         #Remove first packet from the queue
                         queueRealPackets=queueRealPackets[1:]
                     #Emitting a padded cover-packet
                     else:
                         #Sampling packet-size from the device's distribution
                         coverPacketSize=choices(packetSizesList,frequenciesList)[0]
-                        #Level-100 Padding
-                        if W==-100:
-                            paddingSize=Padding(coverPacketSize,W)-coverPacketSize
-                        #Random Padding    
-                        else:
-                            paddingSize=Padding(coverPacketSize,W)
-                        currentPeriod+=[coverPacketSize+paddingSize]
+                        paddedSize=Padding(coverPacketSize,W)
+                        currentPeriod+=[paddedSize]
                 packetSizesAfterSTP+=currentPeriod
                 realPeriods+=[currentPeriod]
             else:
@@ -168,13 +159,8 @@ def STP(timeList,sizeList,dictPackets,q,W):
                         break
                     #Sampling packet-size from the device's distribution
                     coverPacketSize=choices(packetSizesList,frequenciesList)[0]
-                    #Level-100 Padding
-                    if W==-100:
-                        paddingSize=Padding(coverPacketSize,W)-coverPacketSize
-                    #Random Padding
-                    else:
-                        paddingSize=Padding(coverPacketSize,W)
-                    currentPeriod+=[coverPacketSize+paddingSize]  
+                    paddedSize=Padding(coverPacketSize,W)
+                    currentPeriod+=[paddedSize]
                 packetSizesAfterSTP+=currentPeriod
                 fakePeriods+=[currentPeriod]
                 
@@ -204,27 +190,17 @@ def STP(timeList,sizeList,dictPackets,q,W):
                 #Emitting a padded real-packet
                 if len(queueRealPackets)>0:
                     #First packet in queueRealPackets has highest priority
-                    realSize=dictPackets[queueRealPackets[0]]#sizeList[timeList.index(queueRealPackets[0])]
-                    #Level-100 Padding
-                    if W==-100:
-                        paddingSize=Padding(realSize,W)-realSize
-                    #Random Padding
-                    else:
-                        paddingSize=Padding(realSize,W)
-                    currentPeriod+=[realSize+paddingSize]
+                    realSize=dictPackets[queueRealPackets[0]]
+                    paddedSize=Padding(realSize,W)
+                    currentPeriod+=[paddedSize]
                     #Remove first packet from the queue
                     queueRealPackets=queueRealPackets[1:]
                 #Emitting a padded cover-packet
                 else:
                     #Sampling packet-size from the device's distribution
-                    coverPacketSize=coverPacketSize=choices(packetSizesList,frequenciesList)[0]
-                    #Level-100 Padding
-                    if W==-100:
-                        paddingSize=Padding(coverPacketSize,W)-coverPacketSize
-                    #Random Padding
-                    else:
-                        paddingSize=Padding(coverPacketSize,W)
-                    currentPeriod+=[coverPacketSize+paddingSize]  
+                    coverPacketSize=choices(packetSizesList,frequenciesList)[0]
+                    paddedSize=Padding(coverPacketSize,W)
+                    currentPeriod+=[paddedSize]
             packetSizesAfterSTP+=currentPeriod
             realPeriods+=[currentPeriod]    
             """
@@ -238,6 +214,7 @@ def STP(timeList,sizeList,dictPackets,q,W):
             t+=timeStep
     
     return packetSizesAfterSTP,realPeriods,fakePeriods
+
 
 def CreateSubsetSimulation(testedSimulations):
     Counter=collections.Counter
@@ -266,6 +243,8 @@ def CreateSubsetSimulation(testedSimulations):
     for i in range(len(currentSimulation)):
         f.write(str(currentSimulation[i])+"\n")
     f.close()    
+
+
 
 def ClassifyingDevices(learntSimulations,testedSimulations,numberOfDevices):
     cosine=scipy.spatial.distance.cosine
@@ -620,7 +599,7 @@ def SaveSimulations(devicesData,q,W,directoryName):
             realPeriods=list(SplitPeriods(packetSizesAfterSTP))
             #We also obufuscted values of q&W arbitrarily to (-1)
             currentSimulation=(dict(Counter(packetSizesAfterSTP)),realPeriods,fakePeriods,deviceNumber,isLearntSimulation,file,-1,-1)    
-
+       
         simulationFile="Simulation_"+file+"_W"+str(W)+"q"+str(q)+".txt"    
         if os.path.exists(join(directoryName, simulationFile)):
             os.remove(join(directoryName, simulationFile))
@@ -634,7 +613,7 @@ def SaveSimulations(devicesData,q,W,directoryName):
 def DoSimulations(devicesData,action,numberOfDevices,direcoryName=None):
     #Can modify their values to simulate traffic with different values of q&W. For Level-100 padding, specify W=-100
     q=default_q 
-    W=default_W
+    W=-700#default_W
     if action!=0:
         simulations=UploadSimulations()
         DoAction(simulations,action,numberOfDevices)
