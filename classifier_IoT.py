@@ -63,10 +63,38 @@ def Extractor(file):
 def Padding(pktSize,W):
     randint=random.randint
     #Random Padding
-    if W>0:
+    if 0<W:
         return pktSize+randint(1,W)
+    ceil=np.ceil
+    #Linear Padding
+    if W==-101:
+        returnedSize=int(128*ceil(pktSize/128))
+        if pktSize==0:
+            returnedSize=128
+        if returnedSize<=1500:
+            return returnedSize
+        else:
+            return 1500
+    #Exponential Padding
+    if W==-102:
+        import math
+        log=math.log
+        if pktSize==0:
+            returnedSize=2
+        else:
+            returnedSize=int(2**(np.ceil(log(pktSize,2))))
+        if returnedSize<=1500:
+            return returnedSize
+        else:
+            return 1500
+    #Mice/Elephants Padding    
+    if W==-103:
+        if pktSize<=100:
+            return 100
+        else:
+            return 1500    
     #Level-100 Padding
-    if W==-100:
+    if W==-104:
         if pktSize<=100:
             return 100
         elif pktSize<=200:
@@ -79,7 +107,23 @@ def Padding(pktSize,W):
             return randint(pktSize,1400)
         else:
             return 1500
-    
+    #Uniform Padding    
+    if W==-105:
+        if pktSize<=1500:
+            return randint(pktSize,1500)
+        else:
+            return 1500  
+    #Gaussian Padding
+    if W==-106:
+        return int(ceil(pktSize+np.random.normal(400, 100)))
+    #MTU/ILP Padding
+    if W==-107:
+        return 1514
+    #DSTP
+    if -100<=W and W<=0:
+        varrho=(-1)*W/100
+        desiredMean=percentage*(1500-pktSize)
+        return min(1500,pktSize+randint(0,int(ceil(2*desiredMean))))
 
 def STP(timeList,sizeList,dictPackets,q,W):
     Counter=collections.Counter
@@ -144,11 +188,15 @@ def STP(timeList,sizeList,dictPackets,q,W):
                         queueRealPackets=queueRealPackets[1:]
                     #Emitting a padded cover-packet
                     else:
-                        #Sampling packet-size from the device's distribution
-                        coverPacketSize=choices(packetSizesList,frequenciesList)[0]
+                        #DSTP
+                        if -100<=W and W<=0: 
+                            coverPacketSize=0
+                        else:    
+                            #Sampling packet-size from the device's distribution
+                            coverPacketSize=choices(packetSizesList,frequenciesList)[0]
                         paddedSize=Padding(coverPacketSize,W)
                         currentPeriod+=[paddedSize]
-                packetSizesAfterSTP+=currentPeriod
+                packetSizesAfterSTP+=[x for x in currentPeriod if x!=0]
                 realPeriods+=[currentPeriod]
             else:
                 currentPeriod=[]
@@ -157,11 +205,15 @@ def STP(timeList,sizeList,dictPackets,q,W):
                     if t+i*timeStep>finishTime:
                         currentPeriod+=[0 for k in range(T*R-len(currentPeriod))]
                         break
-                    #Sampling packet-size from the device's distribution
-                    coverPacketSize=choices(packetSizesList,frequenciesList)[0]
+                    #DSTP
+                    if -100<=W and W<=0: 
+                        coverPacketSize=0
+                    else:    
+                        #Sampling packet-size from the device's distribution
+                        coverPacketSize=choices(packetSizesList,frequenciesList)[0]
                     paddedSize=Padding(coverPacketSize,W)
                     currentPeriod+=[paddedSize]
-                packetSizesAfterSTP+=currentPeriod
+                packetSizesAfterSTP+=[x for x in currentPeriod if x!=0]
                 fakePeriods+=[currentPeriod]
                 
             """
@@ -197,11 +249,15 @@ def STP(timeList,sizeList,dictPackets,q,W):
                     queueRealPackets=queueRealPackets[1:]
                 #Emitting a padded cover-packet
                 else:
-                    #Sampling packet-size from the device's distribution
-                    coverPacketSize=choices(packetSizesList,frequenciesList)[0]
+                    #DSTP
+                    if -100<=W and W<=0: 
+                        coverPacketSize=0
+                    else:    
+                        #Sampling packet-size from the device's distribution
+                        coverPacketSize=choices(packetSizesList,frequenciesList)[0]
                     paddedSize=Padding(coverPacketSize,W)
                     currentPeriod+=[paddedSize]
-            packetSizesAfterSTP+=currentPeriod
+            packetSizesAfterSTP+=[x for x in currentPeriod if x!=0]
             realPeriods+=[currentPeriod]    
             """
             Incrementing t to the next closest time in which t%T==0 so we'll make the period-injection 
