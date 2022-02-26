@@ -69,15 +69,25 @@ Since our program is only meant to simulate and imitate real padded and shaped t
 The default values for simulations are **q=0.1,W=80**. You can modify their values in DoSimulations function, in order to simulate the devices with different padding methods that are applied within the STP framework (including our proposed DSTP):
 
 **q** needs to be a real number between 0 to 1
+
 **1<=W<=100**: Random-Padding W
+
 **-100<=W<=0**: DSTP with  ϱ=-1*W
+
 **W=-101**: Linear Padding
+
 **W=-102**: Exponential Padding
+
 **W=-103**: Mice/Elephants Padding
+
 **W=-104**: Level-100 Padding
+
 **W=-105**: Uniform Padding
+
 **W=-106**: Gaussian Padding (μ=400,σ=100)
+
 **W=-107**: ILP/MTU Padding
+
 For further details refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
 
 
