@@ -66,7 +66,20 @@ Simulations related to learning traces (aka **learnt simulations**) will help us
 
 Since our program is only meant to simulate and imitate real padded and shaped traffic and not create actual ".pcap" files after applying these mitigations, we also simulate the tested traces ourselves and then save them obfuscated in their tested simulation files, so we can later examine them as if they were coming from a real-time tested network.
 
-The default values for simulations are **q=0.1,W=80**. You can modify their values (**W** has to be either a positive integer -for **Random-Padding**, or the negative integer (-100) - for **Level-100 Padding**, **q** needs to be a real number between 0 to 1) in DoSimulations function in line 636, in order to simulate the devices with different values.
+The default values for simulations are **q=0.1,W=80**. You can modify their values in DoSimulations function, in order to simulate the devices with different padding methods that are applied within the STP framework (including our proposed DSTP):
+**q** needs to be a real number between 0 to 1
+**0<=W<=100**: Random-Padding W
+**-100<=W<0**: DSTP with  ϱ=-1*W
+**W=-101**: Linear Padding
+**W=-102**: Exponential Padding
+**W=-103**: Mice/Elephants Padding
+**W=-104**: Level-100 Padding
+**W=-105**: Gaussian Padding (μ=400,σ=100)
+**W=-106**: Uniform Padding
+**W=-107**: ILP/MTU Padding
+For further details refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
+
+
 
 Each simulation contains the following fields:
 1. <ins>frequencies</ins>: A dictionary that has the device's packet sizes as keys and their associated frequencies as values.
