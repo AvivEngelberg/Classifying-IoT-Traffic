@@ -88,7 +88,7 @@ The default values for simulations are **q=0.1,W=80**. You can modify their valu
 
 **W=-107**: ILP/MTU Padding
 
-For further details refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).
+For further details refer to [Paper link](https://dl.acm.org/doi/10.1145/3559613.3563191).
 
 
 
@@ -127,12 +127,12 @@ Before running this make sure to put inside the directory "Upload Simulations" o
 ### action=4: Subset Identification - Using Full Comparison Check
 Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, and at least one tested simulation file of a subset of devices. 
 
-<ins>What it does</ins>: Based on the learnt simulations, printing to stdout the estimated subset of active devices in every tested simulation file - using the Full Comparison Check algorithm (for more information - see [arXiv Preprint](https://arxiv.org/abs/2110.11188)).
+<ins>What it does</ins>: Based on the learnt simulations, printing to stdout the estimated subset of active devices in every tested simulation file - using the Full Comparison Check algorithm (for more information - see [Paper link](https://dl.acm.org/doi/10.1145/3559613.3563191)).
 
 ### action=5: Subset Identification - Using Fast Scores Bsed Check (FSBC)
 Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, and at least one tested simulation file of a subset of devices. 
 
-<ins>What it does</ins>: Based on the learnt simulations, printing to stdout the estimated subset of active devices in every tested simulation file - using the FSBC algorithm (for more information - see [arXiv Preprint](https://arxiv.org/abs/2110.11188)).
+<ins>What it does</ins>: Based on the learnt simulations, printing to stdout the estimated subset of active devices in every tested simulation file - using the FSBC algorithm (for more information - see [Paper link](https://dl.acm.org/doi/10.1145/3559613.3563191)).
 
 ### action=6: Estimating value of W 
 Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device simulated with **W** per each value of **W** you are examining, and at least one tested simulation file of a device.
@@ -145,7 +145,7 @@ Before running this, first execute the program with action=1 (unless the value o
 <ins>What it does</ins>: Based on all the learnt simulations, printing to stdout the estimated value of **q** chosen from all the examined values of **q** in the learnt simulations, for every tested simulation file.
 
 ### action=8: Classifying Periods: Real/Only-Cover Traffic
-Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, and at least one tested simulation file of a device.
+Before running this make sure to put inside the directory "Upload Simulations" one learnt simulation file of each device, and at least one tested simulation file of a device (for more information - read the early version of the paper [arXiv Preprint](https://arxiv.org/abs/2110.11188)).
 
 <ins>What it does</ins>: Based on the learnt simulations, printing to stdout the classification (using KNN) report of the periods ("Real Traffic"/"Only-Cover Traffic") in every tested simulation file.
 
