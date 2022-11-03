@@ -48,7 +48,7 @@ Inside each device's directory put its learning traffic traces files (either ".p
 
 Inside the "Tested Traffic" directory put the tested traffic traces files that you want to examine.
 
-**Use identical duration time for every tested trace. For the recommended duration times of the traces, refer to [arXiv Preprint](https://arxiv.org/abs/2110.11188).**
+**Use identical duration time for every tested trace. For the recommended duration times of the traces, refer to [Paper link](https://dl.acm.org/doi/10.1145/3559613.3563191).**
 
 ## Creating Simulation Files
 
